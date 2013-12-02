@@ -424,7 +424,7 @@ _html2canvas.Parse = function (images, options, cb) {
     type = getCSS(element, "listStyleType"),
     listBounds;
 
-    if (/^(decimal|decimal-leading-zero|upper-alpha|upper-latin|upper-roman|lower-alpha|lower-greek|lower-latin|lower-roman)$/i.test(type)) {
+    if (/^(decimal|decimal-leading-zero|upper-alpha|upper-latin|upper-roman|lower-alpha|lower-greek|lower-latin|lower-roman|disc)$/i.test(type)) {
       text = listItemText(element, type);
       listBounds = listPosition(element, text);
       setTextVariables(ctx, element, "none", getCSS(element, "color"));

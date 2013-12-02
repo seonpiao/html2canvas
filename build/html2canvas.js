@@ -1454,7 +1454,7 @@ _html2canvas.Parse = function (images, options, cb) {
     type = getCSS(element, "listStyleType"),
     listBounds;
 
-    if (/^(decimal|decimal-leading-zero|upper-alpha|upper-latin|upper-roman|lower-alpha|lower-greek|lower-latin|lower-roman)$/i.test(type)) {
+    if (/^(decimal|decimal-leading-zero|upper-alpha|upper-latin|upper-roman|lower-alpha|lower-greek|lower-latin|lower-roman|disc)$/i.test(type)) {
       text = listItemText(element, type);
       listBounds = listPosition(element, text);
       setTextVariables(ctx, element, "none", getCSS(element, "color"));
@@ -2663,7 +2663,7 @@ _html2canvas.Renderer = function(parseQueue, options){
     })(parseQueue);
 
     function sortZ(context) {
-      Object.keys(context).sort().forEach(function(zi) {
+      Object.keys(context).sort(function(a, b) { return a - b; }).forEach(function(zi) {
         var nonPositioned = [],
         floated = [],
         positioned = [],
