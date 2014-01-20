@@ -226,6 +226,16 @@ _html2canvas.Parse = function (images, options, cb) {
     }
   }
 
+  function drawDisc(x, y, ctx){
+    ctx.setVariable('fillStyle',"#000000");
+    ctx.beginPath();
+    var radius = 3;
+    ctx.arc(x,y - 2 * radius,radius,0,Math.PI*2,true);
+    ctx.closePath();
+    ctx.fill();
+    numDraws+=1;
+  }
+
   function setTextVariables(ctx, el, text_decoration, color) {
     var align = false,
     bold = getCSS(el, "fontWeight"),
@@ -424,7 +434,7 @@ _html2canvas.Parse = function (images, options, cb) {
     type = getCSS(element, "listStyleType"),
     listBounds;
 
-    if (/^(decimal|decimal-leading-zero|upper-alpha|upper-latin|upper-roman|lower-alpha|lower-greek|lower-latin|lower-roman|disc)$/i.test(type)) {
+    if (/^(decimal|decimal-leading-zero|upper-alpha|upper-latin|upper-roman|lower-alpha|lower-greek|lower-latin|lower-roman)$/i.test(type)) {
       text = listItemText(element, type);
       listBounds = listPosition(element, text);
       setTextVariables(ctx, element, "none", getCSS(element, "color"));
@@ -437,6 +447,18 @@ _html2canvas.Parse = function (images, options, cb) {
       }
 
       drawText(text, x, listBounds.bottom, ctx);
+    }
+    else if(/^(disc)$/i.test(type)){
+      listBounds = listPosition(element, text);
+      setTextVariables(ctx, element, "none", getCSS(element, "color"));
+
+      if (getCSS(element, "listStylePosition") === "inside") {
+        ctx.setVariable("textAlign", "left");
+        x = elBounds.left;
+      } else {
+        return;
+      }
+      drawDisc(x, listBounds.bottom, ctx);
     }
   }
 

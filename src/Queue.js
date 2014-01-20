@@ -111,6 +111,27 @@ function h2cRenderContext(width, height) {
         'arguments': arguments
       });
     },
+    arc: function () {
+      storage.push({
+        type: "function",
+        name: "arc",
+        'arguments': arguments
+      });
+    },
+    beginPath: function () {
+      storage.push({
+        type: "function",
+        name: "beginPath",
+        'arguments': arguments
+      });
+    },
+    closePath: function () {
+      storage.push({
+        type: "function",
+        name: "closePath",
+        'arguments': arguments
+      });
+    },
     setVariable: function (variable, value) {
       storage.push({
         type: "variable",
